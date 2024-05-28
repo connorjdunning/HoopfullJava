@@ -2,10 +2,15 @@ package com.example.hoopfulljava;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
 import java.sql.*;
 
 public class HoopController {
 
+    private boolean authed = false;
     private DatabaseController dbController;
     public HoopController () {
         dbController = new DatabaseController();
@@ -24,6 +29,9 @@ public class HoopController {
 //    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DATABASE INFO
 //    private Connection conn = null;
 
+    private void checkAuth() {
+        dbController.
+    }
 
     @FXML
     private Label welcomeText;
@@ -32,4 +40,11 @@ public class HoopController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
+
+    @FXML
+    private TextField userfield;
+    @FXML
+    private PasswordField passfield;
+    @FXML
+    private Button buttonLogin;
 }
