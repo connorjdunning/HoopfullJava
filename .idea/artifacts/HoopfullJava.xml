@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="HoopfullJava">
+    <output-path>$PROJECT_DIR$/out/artifacts/HoopfullJava</output-path>
+    <root id="root">
+      <element id="archive" name="HoopfullJava.jar">
+        <element id="module-output" name="HoopfullJava" />
+      </element>
+    </root>
+  </artifact>
+</component>

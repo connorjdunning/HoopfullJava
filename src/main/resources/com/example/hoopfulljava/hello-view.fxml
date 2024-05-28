@@ -4,18 +4,24 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
 
-<VBox alignment="CENTER" minHeight="740.0" minWidth="450.0" prefHeight="740.0" prefWidth="450.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoopfulljava.HoopController">
+<VBox alignment="CENTER" minHeight="740.0" minWidth="450.0" prefHeight="740.0" prefWidth="432.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoopfulljava.HoopController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -24,8 +30,71 @@
          <Font name="System Bold" size="36.0" />
       </font>
    </Label>
-   <TabPane prefHeight="545.0" prefWidth="334.0" style="-fx-background-color: lightgrey;" tabClosingPolicy="UNAVAILABLE">
+   <TabPane prefHeight="638.0" prefWidth="439.0" style="-fx-background-color: lightgrey;" tabClosingPolicy="UNAVAILABLE">
      <tabs>
+         <Tab text="Home">
+           <content>
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <ScrollPane fitToWidth="true" hvalue="6.0" layoutY="6.0" prefHeight="595.0" prefWidth="410.0" vbarPolicy="ALWAYS">
+                       <content>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                              <children>
+                                 <Text layoutX="12.0" layoutY="27.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Hoopfull Tournaments, a place where you can Manage your baketball team for local tournaments!" wrappingWidth="371.5999984741211">
+                                    <font>
+                                       <Font name="Arial" size="18.0" />
+                                    </font>
+                                 </Text>
+                                 <ImageView fitHeight="196.0" fitWidth="347.0" layoutX="24.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@img/tournament1.png" />
+                                    </image>
+                                    <effect>
+                                       <Bloom threshold="1.0" />
+                                    </effect>
+                                 </ImageView>
+                                 <ImageView fitHeight="238.0" fitWidth="323.0" layoutX="35.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@img/tournament2.png" />
+                                    </image>
+                                    <effect>
+                                       <Bloom threshold="1.0" />
+                                    </effect>
+                                 </ImageView>
+                                 <Text layoutX="58.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Images From Recent Tournaments">
+                                    <font>
+                                       <Font name="Arial Italic" size="18.0" />
+                                    </font>
+                                 </Text>
+                              </children>
+                           </AnchorPane>
+                       </content>
+                     </ScrollPane>
+                  </children></AnchorPane>
+           </content>
+         </Tab>
+         <Tab text="Bracket">
+            <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <ImageView fitHeight="295.0" fitWidth="396.0" layoutX="7.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@img/HoopfullBraket.png" />
+                        </image>
+                     </ImageView>
+                  </children>
+               </AnchorPane>
+            </content>
+         </Tab>
+         <Tab onSelectionChanged="#initMapView" text="Event Map">
+            <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <WebView fx:id="mapWebView" layoutX="13.0" layoutY="18.0" prefHeight="561.0" prefWidth="384.0" />
+                  </children>
+               </AnchorPane>
+            </content>
+         </Tab>
        <Tab text=" Login ">
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -53,6 +122,8 @@
                                        <Font name="System Bold" size="14.0" />
                                     </font>
                                  </Button>
+                                 <Separator orientation="VERTICAL" prefHeight="20.0" style="visibility: hidden;" />
+                                 <Text fx:id="msgLogin" strokeType="OUTSIDE" strokeWidth="0.0" />
                               </children>
                            </VBox>
                         </center>
@@ -114,7 +185,7 @@
                                  <Button mnemonicParsing="false" onAction="#onDropBtnClick" text="DROP" />
                               </children>
                            </HBox>
-                           <TextArea fx:id="playerInfo" prefHeight="200.0" prefWidth="200.0" />
+                           <TextArea fx:id="playerInfo" editable="false" prefHeight="200.0" prefWidth="200.0" />
                            <HBox alignment="CENTER" layoutX="10.0" layoutY="142.0" prefHeight="35.0" prefWidth="386.0">
                               <children>
                                  <Button fx:id="buttonRefresh" mnemonicParsing="false" onAction="#onRefreshButtonClick" text="REFRESH" />
@@ -126,11 +197,6 @@
                </AnchorPane>
          </content>
        </Tab>
-         <Tab text="Untitled Tab">
-           <content>
-             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-           </content>
-         </Tab>
      </tabs>
    </TabPane>
 </VBox>

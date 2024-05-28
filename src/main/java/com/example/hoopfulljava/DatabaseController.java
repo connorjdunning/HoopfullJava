@@ -39,7 +39,7 @@ public class DatabaseController {
             //conect to the database using the connect method
             Connection con = connect();
 
-            String query = "SELECT pass FROM hoopfuldb.account WHERE userName = ?";
+            String query = "SELECT pass FROM hoopfuldb.captain WHERE userName = ?";
 
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, user);
@@ -477,7 +477,7 @@ public class DatabaseController {
                 String playerID = rs.getString("playerID");
                 String playerName = rs.getString("playerName");
                 // Format each player row as a string and add to the list
-                players.add("playerID: " + playerID + ", teamID: " + teamID + ", playerName: " + playerName);
+                players.add("playerID: " + playerID + "\tteamID: " + teamID + "\tplayerName: " + playerName);
             }
 
         } catch (Exception e) {

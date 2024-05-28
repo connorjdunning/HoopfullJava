@@ -12,7 +12,7 @@ public class HoopfulApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HoopfulApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 450, 740);
-//        scene.getStylesheets().add("PATH TO SHEET");
+//        scene.getStylesheets().add("org/kordamp/bootstrapfx/bootstrapfx.css");
         stage.setTitle("Hoopful");
         stage.setScene(scene);
         stage.show();
