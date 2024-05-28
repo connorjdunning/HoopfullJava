@@ -17,7 +17,7 @@ public class DatabaseController {
             //try connecting to the database
             Connection con = DriverManager.getConnection(url, userName, pass);
             //placeholder print for successful connection
-            System.out.println("success!");
+            System.out.println("CONNECTED");
             return con;
         } catch (SQLException e) {
             //place holder catch
@@ -29,6 +29,39 @@ public class DatabaseController {
 
     }
 
+    public boolean login(String user, String pass) {
+
+        System.out.println(user + " " + pass);
+
+        try {
+            //conect to the database using the connect method
+            Connection con = connect();
+
+            String query = "SELECT pass FROM hoopfuldb.account WHERE userName = ?";
+
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, user);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {  // Check if the ResultSet has any results
+                if (pass.equals(rs.getString("pass"))) {
+                    System.out.println("Login Success");
+                    return true;
+                } else {
+                    System.out.println("Login FAILED");
+                    return false;
+                }
+            } else {
+                System.out.println("User not found");
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
     public void insertPlayer(String pID, String tID, String pName) {
 
         try {

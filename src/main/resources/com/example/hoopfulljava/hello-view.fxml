@@ -17,7 +17,7 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <Label prefHeight="18.0" prefWidth="347.0" text="Hoopfull" textAlignment="CENTER" textFill="#ff9500">
+   <Label prefHeight="18.0" prefWidth="347.0" text="Hoopful" textAlignment="CENTER" textFill="#ff9500">
       <font>
          <Font name="System Bold" size="36.0" />
       </font>
@@ -46,7 +46,7 @@
                                  </Label>
                                  <PasswordField fx:id="passfield" maxWidth="250.0" prefHeight="25.0" prefWidth="276.0" promptText="Password" />
                                  <Separator layoutX="212.0" layoutY="254.0" orientation="VERTICAL" prefHeight="35.0" style="visibility: hidden;" />
-                                 <Button fx:id="buttonLogin" mnemonicParsing="false" prefHeight="30.0" prefWidth="72.0" text="LOGIN">
+                                 <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="30.0" prefWidth="72.0" text="LOGIN">
                                     <font>
                                        <Font name="System Bold" size="14.0" />
                                     </font>

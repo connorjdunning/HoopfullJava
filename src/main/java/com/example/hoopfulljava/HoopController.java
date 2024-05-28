@@ -29,16 +29,8 @@ public class HoopController {
 //    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DATABASE INFO
 //    private Connection conn = null;
 
-    private void checkAuth() {
-        dbController.
-    }
-
-    @FXML
-    private Label welcomeText;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private void checkAuth(String userName, String password) {
+        authed = dbController.login(userName, password);
     }
 
     @FXML
@@ -47,4 +39,8 @@ public class HoopController {
     private PasswordField passfield;
     @FXML
     private Button buttonLogin;
+    @FXML
+    protected void onLoginButtonClick() {
+        checkAuth(userfield.getText(), passfield.getText());
+    }
 }
