@@ -1,6 +1,8 @@
 package com.example.hoopfulljava;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 // EACH METHOD HOLDS BASE INPUTS FOR NOW WILL UPDATE THEM TO BOXES WHENEVER NEEDED
@@ -376,13 +378,37 @@ public class DatabaseController {
                 }
         }
 
+    public void addPlayer(String pID, String tID, String pName) {
+
+        try {
+            //conect to the database using the connect method
+            Connection con = connect();
+
+            String add = "INSERT INTO hoopfuldb.players (playerID, teamID, playerName) VALUES (?, ?, ?);";
+
+            PreparedStatement ps = con.prepareStatement(add);
+
+            ps.setString(1, pID);
+            ps.setString(2, tID);
+            ps.setString(3, pName);
+
+            System.out.println(ps.toString() );
+
+            ps.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
         public void deletePlayer(String pID) {
 
             try {
                 //conect to the database using the connect method
                 Connection con = connect(); 
     
-                String add = "DELETE FROM players WHERE playerID = ?;";
+                String add = "DELETE FROM hoopfuldb.players WHERE playerID = ?;";
                 
                 PreparedStatement ps = con.prepareStatement(add);
                 
@@ -390,11 +416,78 @@ public class DatabaseController {
                 
                 ps.execute();
     
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
         }
+
+    /**
+     *
+     * @param userName
+     * @return The teamID of the passed captain
+     */
+    public String getTeamIDFromCap(String userName) {
+
+        String teamID = null;
+
+        try {
+            // Connect to the database using the connect method
+            Connection con = connect();
+
+            String query = "SELECT teamID FROM hoopfuldb.captain WHERE userName = ?;";
+
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, userName);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                teamID = rs.getString("TeamID");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return teamID;
+    }
+
+    /**
+     *
+     * @param teamID
+     * @return An array representing all the players on the given team
+     */
+    public String[] getPlayerArray(String teamID) {
+        // ol' faithful
+        List<String> players = new ArrayList<>();
+
+        try {
+            // Connect to the database using the connect method
+            Connection con = connect();
+
+            String query = "SELECT playerID, teamID, playerName FROM hoopfuldb.players WHERE teamID = ?;";
+
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, teamID);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String playerID = rs.getString("playerID");
+                String playerName = rs.getString("playerName");
+                // Format each player row as a string and add to the list
+                players.add("playerID: " + playerID + ", teamID: " + teamID + ", playerName: " + playerName);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Convert the list to an array and return
+        return players.toArray(new String[0]);
+    }
+
 
 
 
