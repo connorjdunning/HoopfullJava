@@ -52,7 +52,7 @@ public class DatabaseController {
                 String tournamentName = rs.getString("tournamentName");
                 String amountOfTeams = rs.getString("amountOfTeams");
                 String location = rs.getString("location");
-                tournaments.add("Tournament: " + tournamentName + "\tNumber of Teams: " + amountOfTeams + "\tLocation: " + location);
+                tournaments.add(tournamentName + "\nNumber of Teams: " + amountOfTeams + "\nLocation: " + location + "\n\n");
             }
 
         } catch (Exception e) {
@@ -492,7 +492,7 @@ public class DatabaseController {
      */
     public String getTeamIDFromCap(String userName) {
 
-        String teamID = null;
+        String teamID = " ";
 
         try {
             // Connect to the database using the connect method
@@ -506,7 +506,7 @@ public class DatabaseController {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                teamID = rs.getString("TeamID");
+                teamID = rs.getString("teamID");
             }
 
         } catch (Exception e) {
@@ -540,7 +540,7 @@ public class DatabaseController {
                 String playerID = rs.getString("playerID");
                 String playerName = rs.getString("playerName");
                 // Format each player row as a string and add to the list
-                players.add("PlayerID: " + playerID + " TeamID: " + teamID + " PlayerName: " + playerName);
+                players.add("PlayerID: " + playerID + "\n" + " PlayerName: " + playerName + "\n");
             }
 
         } catch (Exception e) {

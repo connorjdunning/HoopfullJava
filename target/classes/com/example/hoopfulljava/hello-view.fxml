@@ -326,14 +326,15 @@
                         <children>
                            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="45.0" prefHeight="27.0" prefWidth="410.0">
                               <children>
-                                 <Label fx:id="teamName" prefHeight="17.0" prefWidth="156.0" text="   Team Name">
+                                 <Label alignment="CENTER" prefHeight="27.0" prefWidth="19.0" text="   ">
                                     <font>
-                                       <Font name="System Bold" size="13.0" />
+                                       <Font name="System Bold" size="12.0" />
                                     </font>
-                                    <padding>
-                                       <Insets left="10.0" />
-                                    </padding>
                                  </Label>
+                                 <Text fx:id="teamName" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="365.0">
+                                    <font>
+                                       <Font name="System Bold" size="18.0" />
+                                    </font></Text>
                               </children></HBox>
                            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="353.0">
                               <children>
@@ -379,21 +380,32 @@
                                     </font>
                                  </Label>
                                  <Button mnemonicParsing="false" onAction="#onDropBtnClick" text="DROP" />
+                                 <Label alignment="CENTER" prefHeight="35.0" prefWidth="139.0" text="   ">
+                                    <font>
+                                       <Font name="System Bold" size="12.0" />
+                                    </font>
+                                 </Label>
+                                 <Button fx:id="buttonRefresh1" mnemonicParsing="false" onAction="#onRefreshButtonClick" text="REFRESH" />
                               </children>
                            </HBox>
                            <TextArea fx:id="playerInfo" editable="false" prefHeight="200.0" prefWidth="200.0" />
                            <HBox alignment="CENTER" layoutX="10.0" layoutY="142.0" prefHeight="35.0" prefWidth="386.0">
                               <children>
-                                 <Button fx:id="buttonRefresh1" mnemonicParsing="false" onAction="#onRefreshButtonClick" text="REFRESH" />
+                                 <Button fx:id="buttonSignOut" mnemonicParsing="false" onAction="#onSignOutButtonClick" onMouseClicked="#onSignOutButtonClick" text="Sign Out" />
                               </children>
                            </HBox>
+                           <Text fx:id="msgLogin1" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           <Text fx:id="msgLogin2" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           <Text fx:id="msgLogin4" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="353.0" />
                         </children>
                      </VBox>
+                     <Text fx:id="msgLogin3" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     <Text fx:id="msgLogin5" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                   </children>
                </AnchorPane>
          </content>
        </Tab>
      </tabs>
    </TabPane>
-   <Button fx:id="buttonSignOut" mnemonicParsing="false" onAction="#onSignOutButtonClick" text="Sign Out" visible="false" />
 </VBox>

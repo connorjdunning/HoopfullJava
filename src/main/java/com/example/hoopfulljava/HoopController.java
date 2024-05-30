@@ -46,7 +46,8 @@ public class HoopController {
     private Text msgLogin;
     @FXML
     private Button buttonLogin;
-    private Label teamName;
+    @FXML
+    private Text teamName;
 
     @FXML
     protected void onLoginButtonClick() {
@@ -55,14 +56,15 @@ public class HoopController {
             teamManage.setDisable(false);
             storedTeamID = dbController.getTeamIDFromCap(userfield.getText() );
             LinkedHashMap<String,String> team = dbController.getTeamInfo(storedTeamID);
+            String storedTeamName = team.get("teamName");
+            String storedCaptName = team.get("captainName");
             onRefreshButtonClick(); // also refresh
 
-
             // maybe change the message to the team name
-            msgLogin.setText("Welcome " + userfield.getText() + ", Authorized to edit " + team.get("teamName") + ".");
-            teamName.setText(team.get("teamName"));
             msgLogin.setFill(Color.GREEN);
-            buttonSignOut.setVisible(true);
+            msgLogin.setText("Welcome " + storedCaptName + ", Authorized to edit " + storedTeamName + ".");
+            teamName.setText(storedTeamName);
+
         } else {
             msgLogin.setText("Login Failed");
             msgLogin.setFill(Color.RED);
@@ -98,7 +100,6 @@ public class HoopController {
     private TextArea playerInfo;
     @FXML
     private Button buttonRefresh;
-
     @FXML
     protected void onRefreshButtonClick() {
 
@@ -163,11 +164,8 @@ public class HoopController {
     private void onSignOutButtonClick() {
         //Disable team management and hide signOutButton
         teamManage.setDisable(true);
-        buttonSignOut.setVisible(false);
-
         //clear the ID
         storedTeamID = "";
-
         //clear fields
         msgLogin.setText("");
         userfield.setText("");
