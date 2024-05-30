@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,28 +23,43 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<VBox alignment="CENTER" minHeight="740.0" minWidth="450.0" prefHeight="740.0" prefWidth="432.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoopfulljava.HoopController">
+<VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="450.0" spacing="20.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hoopfulljava.HoopController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <Label prefHeight="18.0" prefWidth="347.0" text="Hoopful" textAlignment="CENTER" textFill="#ff9500">
+   <Label prefHeight="18.0" prefWidth="347.0" text="Hoopfull" textAlignment="CENTER" textFill="#fe7638">
       <font>
          <Font name="System Bold" size="36.0" />
       </font>
+      <graphic>
+         <ImageView fitHeight="34.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../../../../../src/main/resources/com/example/hoopfulljava/img/logo.png" />
+            </image>
+            <effect>
+               <Bloom threshold="1.0" />
+            </effect>
+         </ImageView>
+      </graphic>
    </Label>
-   <TabPane prefHeight="638.0" prefWidth="439.0" style="-fx-background-color: lightgrey;" tabClosingPolicy="UNAVAILABLE">
+   <TabPane prefHeight="554.0" prefWidth="413.0" style="-fx-background-color: #fe7638;" tabClosingPolicy="UNAVAILABLE">
      <tabs>
-         <Tab text="Home">
+         <Tab style="-fx-background-color: white; -fx-font: 12px System;" text="Home">
            <content>
-             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="404.0">
                   <children>
-                     <ScrollPane fitToWidth="true" hvalue="6.0" layoutY="6.0" prefHeight="595.0" prefWidth="410.0" vbarPolicy="ALWAYS">
-                       <content>
-                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                     <ScrollPane fitToWidth="true" hvalue="6.0" layoutY="5.0" prefHeight="588.0" prefWidth="410.0" style="-fx-background-color: white;" vbarPolicy="ALWAYS">
+                        <content>
+                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="990.0" prefWidth="400.0" style="-fx-background-color: white;">
                               <children>
-                                 <Text layoutX="12.0" layoutY="27.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Hoopfull Tournaments, a place where you can Manage your baketball team for local tournaments!" wrappingWidth="371.5999984741211">
+                                 <Text layoutX="14.0" layoutY="42.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Hoopfull Tournaments," wrappingWidth="361.5999984741211">
                                     <font>
-                                       <Font name="Arial" size="18.0" />
+                                       <Font name="HeadLineA Regular" size="24.0" />
+                                    </font>
+                                 </Text>
+                                 <Text layoutX="19.0" layoutY="92.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="a place where you can explore your local basketball tournaments!" wrappingWidth="361.5999984741211">
+                                    <font>
+                                       <Font name="Courier New Bold" size="16.0" />
                                     </font>
                                  </Text>
                                  <ImageView fitHeight="196.0" fitWidth="347.0" layoutX="24.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
@@ -53,7 +70,7 @@
                                        <Bloom threshold="1.0" />
                                     </effect>
                                  </ImageView>
-                                 <ImageView fitHeight="238.0" fitWidth="323.0" layoutX="35.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+                                 <ImageView fitHeight="248.0" fitWidth="355.0" layoutX="35.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                        <Image url="@img/tournament2.png" />
                                     </image>
@@ -61,23 +78,31 @@
                                        <Bloom threshold="1.0" />
                                     </effect>
                                  </ImageView>
-                                 <Text layoutX="58.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Images From Recent Tournaments">
+                                 <ImageView fitHeight="208.0" fitWidth="332.0" layoutX="41.0" layoutY="611.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@img/tournament3.png" />
+                                    </image>
+                                    <effect>
+                                       <Bloom threshold="1.0" />
+                                    </effect>
+                                 </ImageView>
+                                 <Text layoutX="5.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Images From Recent Tournaments" textAlignment="CENTER" wrappingWidth="379.10546875">
                                     <font>
-                                       <Font name="Arial Italic" size="18.0" />
+                                       <Font name="Courier New Italic" size="12.0" />
                                     </font>
                                  </Text>
                               </children>
                            </AnchorPane>
-                       </content>
+                        </content>
                      </ScrollPane>
                   </children></AnchorPane>
            </content>
          </Tab>
-         <Tab text="Bracket">
+         <Tab style="-fx-background-color: white; -fx-font: 12px System;" text="Brackets">
             <content>
-               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                   <children>
-                     <ImageView fitHeight="295.0" fitWidth="396.0" layoutX="7.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fitHeight="344.0" fitWidth="410.0" layoutX="-6.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@img/HoopfullBraket.png" />
                         </image>
@@ -86,38 +111,202 @@
                </AnchorPane>
             </content>
          </Tab>
-         <Tab onSelectionChanged="#initMapView" text="Event Map">
+         <Tab fx:id="tournaments" style="-fx-background-color: white; -fx-font: 12px System;" text="Tournaments">
             <content>
-               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                  <children>
+                     <Button fx:id="buttonLoad" layoutX="320.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#onLoadButtonClick" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: #fe7638;" text="Load" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="13.0" />
+                        </font></Button>
+                     <Text layoutX="24.0" layoutY="43.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Tournaments" textAlignment="CENTER" wrappingWidth="361.5999984741211">
+                        <font>
+                           <Font name="HeadLineA Regular" size="36.0" />
+                        </font>
+                     </Text>
+                     <TextArea fx:id="tournamentInfo" editable="false" layoutX="6.0" layoutY="89.0" prefHeight="392.0" prefWidth="399.0" style="-fx-background-color: #fe7638; -fx-font: 12px Courier;">
+                        <font>
+                           <Font name="Arial" size="12.0" />
+                        </font></TextArea>
+                  </children>
+               </AnchorPane>
+            </content>
+         </Tab>
+         <Tab onSelectionChanged="#initMapView" style="-fx-background-color: white; -fx-font: 12px System;" text="Event Map">
+            <content>
+               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
                      <WebView fx:id="mapWebView" layoutX="13.0" layoutY="18.0" prefHeight="561.0" prefWidth="384.0" />
                   </children>
                </AnchorPane>
             </content>
          </Tab>
-       <Tab text=" Login ">
+         <Tab style="-fx-background-color: white; -fx-font: 12px System;" text="About">
+            <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="417.0">
+                  <children>
+                     <ScrollPane fitToWidth="true" hvalue="6.0" layoutY="5.0" prefHeight="588.0" prefWidth="415.0" style="-fx-background-color: white;" vbarPolicy="ALWAYS">
+                        <content>
+                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1357.0" prefWidth="399.0" style="-fx-background-color: white;">
+                              <children>
+                                 <Text layoutX="10.0" layoutY="53.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="About Us" wrappingWidth="361.5999984741211">
+                                    <font>
+                                       <Font name="HeadLineA Regular" size="48.0" />
+                                    </font>
+                                 </Text>
+                                 <Text fill="#fe7638" layoutX="8.0" layoutY="66.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--------------------------------------------------------------" wrappingWidth="378.9413070678711">
+                                    <font>
+                                       <Font name="Courier New" size="10.0" />
+                                    </font>
+                                 </Text>
+                                 <Text layoutX="9.0" layoutY="91.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="​Welcome to Hoopfull!" wrappingWidth="328.70467376708984">
+                                    <font>
+                                       <Font name="Courier New Bold" size="19.0" />
+                                    </font>
+                                 </Text>
+                                 <Text layoutX="9.0" layoutY="126.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your ultimate companion for organizing and managing basketball tournaments effortlessly. " wrappingWidth="233.70467376708984">
+                                    <font>
+                                       <Font name="Courier New Bold" size="18.0" />
+                                    </font>
+                                 </Text>
+                                 <Text layoutX="8.0" layoutY="268.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Designed with both players and organizers in mind, our intuitive platform streamlines the entire tournament process, from registration to scheduling and beyond. Whether you're a seasoned team captain or a first-time player, our app offers a comprehensive suite of tools to create, promote, and oversee basketball tournaments of any scale. With features such as easy team registration, real-time match and bracket updates, and a map to help you find your way, Hoopfull ensures that every aspect of your tournament experience is smooth and hassle-free." wrappingWidth="364.7357711791992">
+                                    <font>
+                                       <Font name="Courier New Bold" size="18.0" />
+                                    </font>
+                                 </Text>
+                                 <Text layoutX="48.0" layoutY="965.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="​Frequently Asked Questions" wrappingWidth="328.70467376708984">
+                                    <font>
+                                       <Font name="Adelle Sans Devanagari Extrabold" size="19.0" />
+                                    </font>
+                                 </Text>
+                                 <Accordion layoutX="-2.0" layoutY="972.0" prefHeight="257.0" prefWidth="397.0">
+                                   <panes>
+                                     <TitledPane animated="false" prefHeight="207.0" prefWidth="232.0" style="-fx-background-color: #fe7638;" text="​What are the registration fees for participating teams?">
+                                       <content>
+                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                <children>
+                                                   <Text layoutX="19.0" layoutY="25.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration fees vary by tournament. You can find the registration fee by going to the tournaments tab and clicking the tournament you are interested in." wrappingWidth="278.0709457397461">
+                                                      <font>
+                                                         <Font name="Courier New Bold" size="14.0" />
+                                                      </font>
+                                                   </Text>
+                                                </children>
+                                             </AnchorPane>
+                                       </content>
+                                          <font>
+                                             <Font name="Courier New Bold" size="10.0" />
+                                          </font>
+                                     </TitledPane>
+                                     <TitledPane animated="false" text="How can I get my tournament added to Hoopfull?">
+                                       <content>
+                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="245.0" prefWidth="372.0">
+                                                <children>
+                                                   <Text layoutX="24.0" layoutY="26.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To request that your tournament be added to Hoopfull send us an email at Hoopfull@info.com. Please allow 3-5 days for a response. Requests typically must be recieved at least 30 days prior to your tournament start date. " wrappingWidth="312.8136215209961">
+                                                      <font>
+                                                         <Font name="Courier New Bold" size="14.0" />
+                                                      </font>
+                                                   </Text>
+                                                </children>
+                                             </AnchorPane>
+                                       </content>
+                                          <font>
+                                             <Font name="Courier New Bold" size="10.0" />
+                                          </font>
+                                     </TitledPane>
+                                       <TitledPane animated="false" text="How are prizes or awards distributed to winning teams?">
+                                          <content>
+                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="245.0" prefWidth="372.0">
+                                                <children>
+                                                   <Text layoutX="24.0" layoutY="26.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Awards and prizes are distributed to teams on the last day of the tournament." wrappingWidth="312.8136215209961">
+                                                      <font>
+                                                         <Font name="Courier New Bold" size="14.0" />
+                                                      </font>
+                                                   </Text>
+                                                </children>
+                                             </AnchorPane>
+                                          </content>
+                                          <font>
+                                             <Font name="Courier New Bold" size="10.0" />
+                                          </font>
+                                       </TitledPane>
+                                       <TitledPane animated="false" text="​Are there any guidelines or regulations for team uniforms?">
+                                          <content>
+                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="245.0" prefWidth="372.0">
+                                                <children>
+                                                   <Text layoutX="24.0" layoutY="26.0" lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All team members must be wearing coordinated uniforms to play. Uniforms should be appropriate and should not resemble costumes." wrappingWidth="312.8136215209961">
+                                                      <font>
+                                                         <Font name="Courier New Bold" size="14.0" />
+                                                      </font>
+                                                   </Text>
+                                                </children>
+                                             </AnchorPane>
+                                          </content>
+                                          <font>
+                                             <Font name="Courier New Bold" size="10.0" />
+                                          </font>
+                                       </TitledPane>
+                                   </panes>
+                                 </Accordion>
+                                 <ImageView fitHeight="96.0" fitWidth="146.0" layoutX="250.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../../../../../src/main/resources/com/example/hoopfulljava/img/5.png" />
+                                    </image>
+                                    <effect>
+                                       <Bloom threshold="1.0" />
+                                    </effect>
+                                 </ImageView>
+                                 <ImageView fitHeight="208.0" fitWidth="160.0" layoutX="211.0" layoutY="691.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@img/6.png" />
+                                    </image>
+                                    <effect>
+                                       <Bloom threshold="1.0" />
+                                    </effect>
+                                 </ImageView>
+                                 <ImageView fitHeight="215.0" fitWidth="137.0" layoutX="27.0" layoutY="692.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@img/4.png" />
+                                    </image>
+                                    <effect>
+                                       <Bloom threshold="1.0" />
+                                    </effect>
+                                 </ImageView>
+                              </children>
+                           </AnchorPane>
+                        </content>
+                     </ScrollPane>
+                  </children>
+               </AnchorPane>
+            </content>
+         </Tab>
+       <Tab style="-fx-background-color: white; -fx-font: 12px System;" text=" Coach Login ">
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                     <BorderPane prefHeight="523.0" prefWidth="410.0">
+                     <BorderPane prefHeight="523.0" prefWidth="410.0" style="-fx-background-color: white;">
                         <center>
-                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="410.0" BorderPane.alignment="CENTER">
                               <children>
-                                 <Label contentDisplay="CENTER" layoutX="184.0" layoutY="249.0" text="Username">
+                                 <Text fill="#616060" lineSpacing="6.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coach Login" wrappingWidth="192.5999984741211">
                                     <font>
-                                       <Font name="System Bold" size="14.0" />
+                                       <Font size="36.0" />
+                                    </font>
+                                 </Text>
+                                 <Label contentDisplay="CENTER" layoutX="184.0" layoutY="249.0" text="Username" textFill="#616060">
+                                    <font>
+                                       <Font name="System Bold" size="18.0" />
                                     </font>
                                  </Label>
                                  <TextField fx:id="userfield" maxWidth="250.0" prefHeight="25.0" prefWidth="272.0" promptText="Username" />
                                  <Separator orientation="VERTICAL" prefHeight="35.0" style="visibility: hidden;" />
-                                 <Label contentDisplay="CENTER" text="Password">
+                                 <Label contentDisplay="CENTER" text="Password" textFill="#616060">
                                     <font>
-                                       <Font name="System Bold" size="14.0" />
+                                       <Font name="System Bold" size="18.0" />
                                     </font>
                                  </Label>
                                  <PasswordField fx:id="passfield" maxWidth="250.0" prefHeight="25.0" prefWidth="276.0" promptText="Password" />
                                  <Separator layoutX="212.0" layoutY="254.0" orientation="VERTICAL" prefHeight="35.0" style="visibility: hidden;" />
-                                 <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="30.0" prefWidth="72.0" text="LOGIN">
+                                 <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="30.0" prefWidth="154.0" style="-fx-background-color: fe7638;" text="LOGIN" textFill="WHITE">
                                     <font>
                                        <Font name="System Bold" size="14.0" />
                                     </font>
@@ -132,13 +321,24 @@
                </AnchorPane>
          </content>
        </Tab>
-       <Tab fx:id="teamManage" disable="true" text="Team Management">
+       <Tab fx:id="teamManage" disable="true" style="-fx-background-color: white; -fx-font: 12px System;" text="Team Management">
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
                      <VBox layoutX="-3.0" layoutY="2.0" prefHeight="513.0" prefWidth="410.0">
                         <children>
-                           <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="45.0" prefHeight="27.0" prefWidth="410.0" />
+                           <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="45.0" prefHeight="27.0" prefWidth="410.0">
+                              <children>
+                                 <Label alignment="CENTER" prefHeight="27.0" prefWidth="19.0" text="   ">
+                                    <font>
+                                       <Font name="System Bold" size="12.0" />
+                                    </font>
+                                 </Label>
+                                 <Text fx:id="teamName" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="365.0">
+                                    <font>
+                                       <Font name="System Bold" size="18.0" />
+                                    </font></Text>
+                              </children></HBox>
                            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="353.0">
                               <children>
                                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="82.0" text="Player ID">
@@ -183,16 +383,28 @@
                                     </font>
                                  </Label>
                                  <Button mnemonicParsing="false" onAction="#onDropBtnClick" text="DROP" />
+                                 <Label alignment="CENTER" prefHeight="35.0" prefWidth="139.0" text="   ">
+                                    <font>
+                                       <Font name="System Bold" size="12.0" />
+                                    </font>
+                                 </Label>
+                                 <Button fx:id="buttonRefresh1" mnemonicParsing="false" onAction="#onRefreshButtonClick" text="REFRESH" />
                               </children>
                            </HBox>
                            <TextArea fx:id="playerInfo" editable="false" prefHeight="200.0" prefWidth="200.0" />
                            <HBox alignment="CENTER" layoutX="10.0" layoutY="142.0" prefHeight="35.0" prefWidth="386.0">
                               <children>
-                                 <Button fx:id="buttonRefresh" mnemonicParsing="false" onAction="#onRefreshButtonClick" text="REFRESH" />
+                                 <Button fx:id="buttonSignOut" mnemonicParsing="false" onAction="#onSignOutButtonClick" onMouseClicked="#onSignOutButtonClick" text="Sign Out" />
                               </children>
                            </HBox>
+                           <Text fx:id="msgLogin1" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           <Text fx:id="msgLogin2" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           <Text fx:id="msgLogin4" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="353.0" />
                         </children>
                      </VBox>
+                     <Text fx:id="msgLogin3" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     <Text fx:id="msgLogin5" layoutX="10.0" layoutY="10.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                   </children>
                </AnchorPane>
          </content>

@@ -3,19 +3,31 @@ package com.example.hoopfulljava;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.LinkedHashMap;
 
-public class HoopController {
+import static java.awt.Font.PLAIN;
 
+public class HoopController {
+    /**
+     * Fields
+     */
     private boolean authed = false;
     private String storedTeamID = "";
     private DatabaseController dbController;
 
+    /**
+     * Constructor for HoopfulController
+     */
     public HoopController() {
         dbController = new DatabaseController();
 
@@ -34,10 +46,18 @@ public class HoopController {
 //    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DATABASE INFO
 //    private Connection conn = null;
 
+    /**
+     * Method to authenticate the login information of the user
+     * @param userName
+     * @param password
+     */
     private void checkAuth(String userName, String password) {
         authed = dbController.login(userName, password);
     }
 
+    /**
+     * Fields
+     */
     @FXML
     private TextField userfield;
     @FXML
@@ -48,7 +68,32 @@ public class HoopController {
     private Button buttonLogin;
     @FXML
     private Text teamName;
-
+    @FXML
+    private TextField playerIDField;
+    @FXML
+    private TextField teamIDField;
+    @FXML
+    private TextField playerNameField;
+    @FXML
+    private Tab teamManage;
+    @FXML
+    private TextArea playerInfo;
+    @FXML
+    private Button buttonRefresh;
+    @FXML
+    private Tab tournaments;
+    @FXML
+    private TextArea tournamentInfo;
+    @FXML
+    private Button buttonLoad;
+    @FXML
+    private WebView mapWebView;
+    boolean mapLoaded = false;
+    @FXML
+    private Button buttonSignOut;
+    /**
+     * Login button method that controls when its clicked
+     */
     @FXML
     protected void onLoginButtonClick() {
         checkAuth(userfield.getText(), passfield.getText());
@@ -71,13 +116,10 @@ public class HoopController {
         }
     }
 
-    @FXML
-    private TextField playerIDField;
-    @FXML
-    private TextField teamIDField;
-    @FXML
-    private TextField playerNameField;
 
+    /**
+     * Method that handles the clicking of the add button
+     */
     @FXML
     protected void onAddBtnClick() {
         dbController.addPlayer(
@@ -88,18 +130,18 @@ public class HoopController {
         onRefreshButtonClick(); // also refresh
     }
 
+    /**
+     * Method that handles the clicking of the drop button
+     */
     @FXML
     protected void onDropBtnClick() {
         dbController.deletePlayer(playerIDField.getText());
         onRefreshButtonClick(); // also refresh
     }
 
-    @FXML
-    private Tab teamManage;
-    @FXML
-    private TextArea playerInfo;
-    @FXML
-    private Button buttonRefresh;
+    /**
+     * Method that handles the clicking of the Refresh button
+     */
     @FXML
     protected void onRefreshButtonClick() {
 
@@ -117,13 +159,9 @@ public class HoopController {
     }
 
 
-    @FXML
-    private Tab tournaments;
-    @FXML
-    private TextArea tournamentInfo;
-    @FXML
-    private Button buttonLoad;
-
+    /**
+     * Method that handles the load button
+     */
     @FXML
     protected void onLoadButtonClick() {
 
@@ -138,15 +176,18 @@ public class HoopController {
         }
 
         tournamentInfo.setText(tournamentInfoBuilder.toString());
+
+
     }
 
     //public final void setOnLoadButtonClicked(EventHandler<? super MouseEvent> value) {
     //    onLoadButtonClick();
     //}
 
-    @FXML
-    private WebView mapWebView;
-    boolean mapLoaded = false;
+    /**
+     * Method that handles the initialization of the map view
+     *
+     */
     @FXML
     private void initMapView() {
         if (!mapLoaded) {
@@ -158,8 +199,10 @@ public class HoopController {
 
     }
 
-    @FXML
-    private Button buttonSignOut;
+
+    /**
+     * Method that handles the signout button
+     */
     @FXML
     private void onSignOutButtonClick() {
         //Disable team management and hide signOutButton

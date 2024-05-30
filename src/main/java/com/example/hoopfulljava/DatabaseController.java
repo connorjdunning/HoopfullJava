@@ -8,13 +8,17 @@ import java.util.List;
 
 // EACH METHOD HOLDS BASE INPUTS FOR NOW WILL UPDATE THEM TO BOXES WHENEVER NEEDED
 public class DatabaseController {
-    
 
+
+    /**
+     * Method that creates a connection to the database
+     * @return
+     */
     public Connection connect() {
 
         String url = "jdbc:mysql://localhost:3306/hoopfulDB";
         String userName = "root";
-        String pass = "password";
+        String pass = "cs380";
 
         try {
             //try connecting to the database
@@ -32,7 +36,10 @@ public class DatabaseController {
 
     }
 
-
+    /**
+     * Method to return a String array of the tournaments within the database
+     * @return
+     */
     public String[] getTournament() {
         // ol' faithful
         List<String> tournaments = new ArrayList<>();
@@ -63,6 +70,11 @@ public class DatabaseController {
         return tournaments.toArray(new String[0]);
     }
 
+    /**
+     * Method to retrieve a team's info from the database
+     * @param teamID
+     * @return
+     */
     public LinkedHashMap<String, String> getTeamInfo(String teamID) {
 
         LinkedHashMap<String, String> team = new LinkedHashMap<>();
@@ -93,7 +105,12 @@ public class DatabaseController {
         return team;
     }
 
-
+    /**
+     * Method to login a person within the database
+     * @param user
+     * @param pass
+     * @return
+     */
     public boolean login(String user, String pass) {
 
         System.out.println(user + " " + pass);
@@ -127,6 +144,13 @@ public class DatabaseController {
 
         return false;
     }
+
+    /**
+     * Method for inserting a player within the database
+     * @param pID
+     * @param tID
+     * @param pName
+     */
     public void insertPlayer(String pID, String tID, String pName) {
 
         try {
@@ -164,6 +188,14 @@ public class DatabaseController {
 
     }
 
+    /**
+     * Method to create a team within the database
+     * @param tID
+     * @param tName
+     * @param amountPlayers
+     * @param captainID
+     * @param captainName
+     */
     public void createTeam(String tID, String tName, int amountPlayers, String captainID, String captainName) {
 
         try {
@@ -209,7 +241,15 @@ public class DatabaseController {
     
     
         }
-    
+
+    /**
+     * Method to create a captain within the database
+     * @param captainID
+     * @param captainName
+     * @param teamID
+     * @param userName
+     * @param pass
+     */
         public void createCaptain(String captainID, String captainName, String teamID, String userName, String pass) {
 
             try {
@@ -254,7 +294,12 @@ public class DatabaseController {
             
         }
 
-        public void createAccount(String userName, String pass) {
+    /**
+     * Method to create an account within the database
+     * @param userName
+     * @param pass
+     */
+    public void createAccount(String userName, String pass) {
 
             try {
                 //conect to the database using the connect method
@@ -287,8 +332,13 @@ public class DatabaseController {
                 }
 
         }
-    
-        public void updatePassword(String userName, String pass) {
+
+    /**
+     * Method to update the password of an account
+     * @param userName
+     * @param pass
+     */
+    public void updatePassword(String userName, String pass) {
 
             try {
                 //conect to the database using the connect method
@@ -310,6 +360,10 @@ public class DatabaseController {
 
         }
 
+    /**
+     * Method to delete an account from the database based on username
+     * @param userName
+     */
         public void deleteAccount(String userName) {
 
             try {
@@ -330,6 +384,14 @@ public class DatabaseController {
                 }
         }
 
+    /**
+     * Method to update a captiain within the database
+     * @param captainID
+     * @param captainName
+     * @param teamID
+     * @param userName
+     * @param pass
+     */
         public void updateCaptain(String captainID, String captainName, String teamID, String userName, String pass) {
 
             try {
@@ -374,7 +436,14 @@ public class DatabaseController {
                 }
         }
 
-
+    /**
+     * Method to update a team within the database
+     * @param tID
+     * @param tName
+     * @param amountPlayers
+     * @param captainID
+     * @param captainName
+     */
         public void updateTeam(String tID, String tName, int amountPlayers, String captainID, String captainName) {
 
             try {
@@ -399,6 +468,10 @@ public class DatabaseController {
                 }
         }
 
+    /**
+     * Method to delete a team from the database
+     * @param tID
+     */
         public void deleteTeam(String tID) {
 
             try {
@@ -419,6 +492,12 @@ public class DatabaseController {
                 }
         }
 
+    /**
+     * Method to update a player's information
+     * @param pID
+     * @param tID
+     * @param pName
+     */
         public void updatePlayer(String pID, String tID, String pName) {
 
             try {
@@ -441,6 +520,12 @@ public class DatabaseController {
                 }
         }
 
+    /**
+     * Method to add a player
+     * @param pID
+     * @param tID
+     * @param pName
+     */
     public void addPlayer(String pID, String tID, String pName) {
 
         try {
@@ -465,6 +550,10 @@ public class DatabaseController {
         }
     }
 
+    /**
+     * Delete Player Method
+     * @param pID
+     */
         public void deletePlayer(String pID) {
 
             try {
@@ -486,7 +575,7 @@ public class DatabaseController {
         }
 
     /**
-     *
+     * Method to grab the teamID from the captain who is currently logged in
      * @param userName
      * @return The teamID of the passed captain
      */
@@ -517,7 +606,7 @@ public class DatabaseController {
     }
 
     /**
-     *
+     * Method to get an array of players based off of teamID
      * @param teamID
      * @return An array representing all the players on the given team
      */
