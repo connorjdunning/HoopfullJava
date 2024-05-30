@@ -324,7 +324,17 @@
                   <children>
                      <VBox layoutX="-3.0" layoutY="2.0" prefHeight="513.0" prefWidth="410.0">
                         <children>
-                           <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="45.0" prefHeight="27.0" prefWidth="410.0" />
+                           <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="45.0" prefHeight="27.0" prefWidth="410.0">
+                              <children>
+                                 <Label fx:id="teamName" prefHeight="17.0" prefWidth="156.0" text="   Team Name">
+                                    <font>
+                                       <Font name="System Bold" size="13.0" />
+                                    </font>
+                                    <padding>
+                                       <Insets left="10.0" />
+                                    </padding>
+                                 </Label>
+                              </children></HBox>
                            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="353.0">
                               <children>
                                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="82.0" text="Player ID">
@@ -374,7 +384,7 @@
                            <TextArea fx:id="playerInfo" editable="false" prefHeight="200.0" prefWidth="200.0" />
                            <HBox alignment="CENTER" layoutX="10.0" layoutY="142.0" prefHeight="35.0" prefWidth="386.0">
                               <children>
-                                 <Button fx:id="buttonRefresh" mnemonicParsing="false" onAction="#onRefreshButtonClick" text="REFRESH" />
+                                 <Button fx:id="buttonRefresh1" mnemonicParsing="false" onAction="#onRefreshButtonClick" text="REFRESH" />
                               </children>
                            </HBox>
                         </children>
@@ -385,4 +395,5 @@
        </Tab>
      </tabs>
    </TabPane>
+   <Button fx:id="buttonSignOut" mnemonicParsing="false" onAction="#onSignOutButtonClick" text="Sign Out" visible="false" />
 </VBox>

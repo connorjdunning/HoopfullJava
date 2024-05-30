@@ -1,21 +1,22 @@
 package com.example.hoopfulljava;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-
-import java.sql.*;
+import java.awt.event.MouseEvent;
+import java.util.LinkedHashMap;
 
 public class HoopController {
 
     private boolean authed = false;
     private String storedTeamID = "";
     private DatabaseController dbController;
-    public HoopController () {
+
+    public HoopController() {
         dbController = new DatabaseController();
 
 //        try {
@@ -45,28 +46,36 @@ public class HoopController {
     private Text msgLogin;
     @FXML
     private Button buttonLogin;
+    private Label teamName;
+
     @FXML
     protected void onLoginButtonClick() {
         checkAuth(userfield.getText(), passfield.getText());
         if (authed) {
             teamManage.setDisable(false);
             storedTeamID = dbController.getTeamIDFromCap(userfield.getText() );
+            LinkedHashMap<String,String> team = dbController.getTeamInfo(storedTeamID);
             onRefreshButtonClick(); // also refresh
 
+
             // maybe change the message to the team name
-            msgLogin.setText("Welcome " + userfield.getText() + ", Authorized to edit Team: " + storedTeamID);
+            msgLogin.setText("Welcome " + userfield.getText() + ", Authorized to edit " + team.get("teamName") + ".");
+            teamName.setText(team.get("teamName"));
             msgLogin.setFill(Color.GREEN);
+            buttonSignOut.setVisible(true);
         } else {
             msgLogin.setText("Login Failed");
             msgLogin.setFill(Color.RED);
         }
     }
+
     @FXML
     private TextField playerIDField;
     @FXML
     private TextField teamIDField;
     @FXML
     private TextField playerNameField;
+
     @FXML
     protected void onAddBtnClick() {
         dbController.addPlayer(
@@ -76,17 +85,20 @@ public class HoopController {
         );
         onRefreshButtonClick(); // also refresh
     }
+
     @FXML
     protected void onDropBtnClick() {
-        dbController.deletePlayer(playerIDField.getText() );
+        dbController.deletePlayer(playerIDField.getText());
         onRefreshButtonClick(); // also refresh
     }
+
     @FXML
     private Tab teamManage;
     @FXML
     private TextArea playerInfo;
     @FXML
     private Button buttonRefresh;
+
     @FXML
     protected void onRefreshButtonClick() {
 
@@ -102,6 +114,35 @@ public class HoopController {
 
         playerInfo.setText(playerInfoBuilder.toString());
     }
+
+
+    @FXML
+    private Tab tournaments;
+    @FXML
+    private TextArea tournamentInfo;
+    @FXML
+    private Button buttonLoad;
+
+    @FXML
+    protected void onLoadButtonClick() {
+
+        String[] tournaments = dbController.getTournament();
+
+        // StringBuilder to concatenate the player info
+        StringBuilder tournamentInfoBuilder = new StringBuilder();
+
+        // append each player's information
+        for (String tournament : tournaments) {
+            tournamentInfoBuilder.append(tournament).append("\n");
+        }
+
+        tournamentInfo.setText(tournamentInfoBuilder.toString());
+    }
+
+    //public final void setOnLoadButtonClicked(EventHandler<? super MouseEvent> value) {
+    //    onLoadButtonClick();
+    //}
+
     @FXML
     private WebView mapWebView;
     boolean mapLoaded = false;
@@ -115,4 +156,25 @@ public class HoopController {
         }
 
     }
+
+    @FXML
+    private Button buttonSignOut;
+    @FXML
+    private void onSignOutButtonClick() {
+        //Disable team management and hide signOutButton
+        teamManage.setDisable(true);
+        buttonSignOut.setVisible(false);
+
+        //clear the ID
+        storedTeamID = "";
+
+        //clear fields
+        msgLogin.setText("");
+        userfield.setText("");
+        passfield.setText("");
+        teamName.setText("");
+        playerInfo.setText("");
+        storedTeamID = "";
+    }
+
 }

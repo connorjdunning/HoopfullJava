@@ -2,6 +2,7 @@ package com.example.hoopfulljava;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 
@@ -11,9 +12,9 @@ public class DatabaseController {
 
     public Connection connect() {
 
-        String url = "jdbc:mysql://localhost:3306/hoopfuldb";
+        String url = "jdbc:mysql://localhost:3306/hoopfulDB";
         String userName = "root";
-        String pass = "";
+        String pass = "password";
 
         try {
             //try connecting to the database
@@ -31,12 +32,74 @@ public class DatabaseController {
 
     }
 
+
+    public String[] getTournament() {
+        // ol' faithful
+        List<String> tournaments = new ArrayList<>();
+
+        try {
+            // Connect to the database using the connect method
+            Connection con = connect();
+
+            String query = "SELECT tournamentName, amountOfTeams, location FROM hoopfuldb.Touranments";
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                String tournamentName = rs.getString("tournamentName");
+                String amountOfTeams = rs.getString("amountOfTeams");
+                String location = rs.getString("location");
+                tournaments.add("Tournament: " + tournamentName + "\tNumber of Teams: " + amountOfTeams + "\tLocation: " + location);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Convert the list to an array and return
+        return tournaments.toArray(new String[0]);
+    }
+
+    public LinkedHashMap<String, String> getTeamInfo(String teamID) {
+
+        LinkedHashMap<String, String> team = new LinkedHashMap<>();
+
+        try {
+            // Connect to the database using the connect method
+            Connection con = connect();
+
+            String query = "SELECT teamName, captainName FROM hoopfuldb.teams WHERE teamID = ?;";
+
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, teamID);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String teamName = rs.getString("teamName");
+                String captainName = rs.getString("captainName");
+                // Format each player to a string in the hashmap
+                team.put("teamName", teamName);
+                team.put("captainName", captainName);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return team;
+    }
+
+
     public boolean login(String user, String pass) {
 
         System.out.println(user + " " + pass);
 
         try {
-            //conect to the database using the connect method
+            //connect to the database using the connect method
             Connection con = connect();
 
             String query = "SELECT pass FROM hoopfuldb.captain WHERE userName = ?";
@@ -150,7 +213,7 @@ public class DatabaseController {
         public void createCaptain(String captainID, String captainName, String teamID, String userName, String pass) {
 
             try {
-                //conect to the database using the connect method
+                //connect to the database using the connect method
                 Connection con = connect();
     
     
@@ -477,7 +540,7 @@ public class DatabaseController {
                 String playerID = rs.getString("playerID");
                 String playerName = rs.getString("playerName");
                 // Format each player row as a string and add to the list
-                players.add("playerID: " + playerID + "\tteamID: " + teamID + "\tplayerName: " + playerName);
+                players.add("PlayerID: " + playerID + " TeamID: " + teamID + " PlayerName: " + playerName);
             }
 
         } catch (Exception e) {
@@ -487,8 +550,6 @@ public class DatabaseController {
         // Convert the list to an array and return
         return players.toArray(new String[0]);
     }
-
-
 
 
 }
