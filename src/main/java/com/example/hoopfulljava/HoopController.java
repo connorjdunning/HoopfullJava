@@ -1,19 +1,28 @@
 package com.example.hoopfulljava;
 
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.control.ListView;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 public class HoopController {
 
     private boolean authed = false;
     private String storedTeamID = "";
+
+    private Captain captain;
+
+    private Team team;
     private DatabaseController dbController;
 
     public HoopController() {
@@ -48,22 +57,39 @@ public class HoopController {
     private Button buttonLogin;
     @FXML
     private Text teamName;
+    @FXML
+    private TableView<Player> playerInfoTable;
+    @FXML
+    private TableColumn<Player, String> playerIdCol;
+    @FXML
+    private TableColumn<Player, String> nameCol;
 
+
+    /**
+     * When team captain logs in it creates a Captain and a Team for that
+     * captain. Checks if captain is authorized to log in or not.
+     */
     @FXML
     protected void onLoginButtonClick() {
         checkAuth(userfield.getText(), passfield.getText());
         if (authed) {
             teamManage.setDisable(false);
-            storedTeamID = dbController.getTeamIDFromCap(userfield.getText() );
-            LinkedHashMap<String,String> team = dbController.getTeamInfo(storedTeamID);
-            String storedTeamName = team.get("teamName");
-            String storedCaptName = team.get("captainName");
+            //Create a captain
+            captain = dbController.getTeamIDFromCap(userfield.getText());
+            storedTeamID = captain.getTeamID();
+
+            //Create the team
+            team = new Team(dbController.getTeamName(storedTeamID),captain, storedTeamID);
             onRefreshButtonClick(); // also refresh
 
-            // maybe change the message to the team name
+            //Welcome Message
             msgLogin.setFill(Color.GREEN);
-            msgLogin.setText("Welcome " + storedCaptName + ", Authorized to edit " + storedTeamName + ".");
-            teamName.setText(storedTeamName);
+            msgLogin.setText("Welcome " + captain.getName() + ", Authorized to edit " + team.getTeamName() + ".");
+            teamName.setText(team.getTeamName());
+
+            // Make it so each colum displays the correct values from Player
+            playerIdCol.setCellValueFactory(new PropertyValueFactory<Player, String>("playerID"));
+            nameCol.setCellValueFactory(new PropertyValueFactory<Player, String>("name"));
 
         } else {
             msgLogin.setText("Login Failed");
@@ -77,20 +103,27 @@ public class HoopController {
     private TextField teamIDField;
     @FXML
     private TextField playerNameField;
+    @FXML
+    private Label warnLabel;
 
     @FXML
     protected void onAddBtnClick() {
-        dbController.addPlayer(
-                playerIDField.getText(),
-                teamIDField.getText(),
-                playerNameField.getText()
-        );
-        onRefreshButtonClick(); // also refresh
+        if(emptyField()) {
+            warnLabel.setText("Empty field unable to add player.");
+        } else {
+            Player newPlayer = new Player(playerNameField.getText(), playerIDField.getText(), captain.getTeamID());
+            team.addPlayer(newPlayer);
+            onRefreshButtonClick(); // also refresh
+        }
     }
+
 
     @FXML
     protected void onDropBtnClick() {
-        dbController.deletePlayer(playerIDField.getText());
+        Player rePlayer = playerInfoTable.getSelectionModel().getSelectedItem();
+
+        team.removePlayer(rePlayer.getPlayerID());
+
         onRefreshButtonClick(); // also refresh
     }
 
@@ -102,18 +135,14 @@ public class HoopController {
     private Button buttonRefresh;
     @FXML
     protected void onRefreshButtonClick() {
+        playerInfoTable.getItems().clear();
+        /*
+          Grabbing players in the team based on the team id and
+           populating that team.
+         */
+        team.setTeam(dbController.getPlayers(team));
 
-        String[] players = dbController.getPlayerArray(storedTeamID);
-
-        // StringBuilder to concatenate the player info
-        StringBuilder playerInfoBuilder = new StringBuilder();
-
-        // append each player's information
-        for (String player : players) {
-            playerInfoBuilder.append(player).append("\n");
-        }
-
-        playerInfo.setText(playerInfoBuilder.toString());
+        playerInfoTable.getItems().addAll(team.getTeam());
     }
 
 
@@ -173,6 +202,11 @@ public class HoopController {
         teamName.setText("");
         playerInfo.setText("");
         storedTeamID = "";
+    }
+
+    public boolean emptyField(){
+        return(playerIDField.getText().equals("") || playerNameField.getText().equals("")
+                || playerIDField.getText().equals(" ") ||playerNameField.getText().equals(" "));
     }
 
 }

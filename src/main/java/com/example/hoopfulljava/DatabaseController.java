@@ -2,7 +2,7 @@ package com.example.hoopfulljava;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -14,7 +14,7 @@ public class DatabaseController {
 
         String url = "jdbc:mysql://localhost:3306/hoopfulDB";
         String userName = "root";
-        String pass = "password";
+        String pass = "Hello1234";
 
         try {
             //try connecting to the database
@@ -63,9 +63,18 @@ public class DatabaseController {
         return tournaments.toArray(new String[0]);
     }
 
-    public LinkedHashMap<String, String> getTeamInfo(String teamID) {
+    /**
+     * Get the Name from a team based on the team ID of a
+     * captain.
+     *
+     * @param teamID - a string of the team ID for the team being
+     *               searched for.
+     *
+     * @return a string of the name of the team.
+     */
+    public String getTeamName(String teamID) {
 
-        LinkedHashMap<String, String> team = new LinkedHashMap<>();
+        String teamName = "";
 
         try {
             // Connect to the database using the connect method
@@ -79,18 +88,14 @@ public class DatabaseController {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                String teamName = rs.getString("teamName");
-                String captainName = rs.getString("captainName");
-                // Format each player to a string in the hashmap
-                team.put("teamName", teamName);
-                team.put("captainName", captainName);
+                teamName = rs.getString("teamName");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return team;
+        return teamName;
     }
 
 
@@ -490,15 +495,15 @@ public class DatabaseController {
      * @param userName
      * @return The teamID of the passed captain
      */
-    public String getTeamIDFromCap(String userName) {
+    public Captain getTeamIDFromCap(String userName) {
 
-        String teamID = " ";
+        Captain captain = null;
 
         try {
             // Connect to the database using the connect method
             Connection con = connect();
 
-            String query = "SELECT teamID FROM hoopfuldb.captain WHERE userName = ?;";
+            String query = "SELECT captainName, teamID FROM hoopfuldb.captain WHERE userName = ?;";
 
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, userName);
@@ -506,24 +511,27 @@ public class DatabaseController {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                teamID = rs.getString("teamID");
+                captain = new Captain(rs.getString("captainName") ,rs.getString("teamID"));
+                System.out.println(captain.getName());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return teamID;
+        return captain;
     }
 
     /**
-     *
      * @param teamID
      * @return An array representing all the players on the given team
      */
-    public String[] getPlayerArray(String teamID) {
+    public LinkedList<Player> getPlayers(Team team) {
         // ol' faithful
-        List<String> players = new ArrayList<>();
+        Player player = null;
+
+        LinkedList<Player> grabTeam= new LinkedList<>();
+
 
         try {
             // Connect to the database using the connect method
@@ -532,15 +540,17 @@ public class DatabaseController {
             String query = "SELECT playerID, teamID, playerName FROM hoopfuldb.players WHERE teamID = ?;";
 
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, teamID);
+            ps.setString(1, team.getTeamID());
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 String playerID = rs.getString("playerID");
                 String playerName = rs.getString("playerName");
+                String teamID = rs.getString("teamID");
                 // Format each player row as a string and add to the list
-                players.add("PlayerID: " + playerID + "\n" + " PlayerName: " + playerName + "\n");
+                player = new Player(playerName, playerID, teamID);
+                grabTeam.add(player);
             }
 
         } catch (Exception e) {
@@ -548,7 +558,7 @@ public class DatabaseController {
         }
 
         // Convert the list to an array and return
-        return players.toArray(new String[0]);
+        return grabTeam;
     }
 
 
