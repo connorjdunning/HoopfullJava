@@ -1,5 +1,4 @@
 package com.example.hoopfulljava;
-
 public class Captain {
     private String name;
 

@@ -75,7 +75,7 @@ public class HoopController {
         if (authed) {
             teamManage.setDisable(false);
             //Create a captain
-            captain = dbController.getTeamIDFromCap(userfield.getText());
+            captain = dbController.getTeamCaptain(userfield.getText());
             storedTeamID = captain.getTeamID();
 
             //Create the team
@@ -106,6 +106,11 @@ public class HoopController {
     @FXML
     private Label warnLabel;
 
+    /**
+     * Checks if the input fields are not empty. If the input
+     * fields are not empty it uses the Team addPlayer method
+     * to add the player to a team and database.
+     */
     @FXML
     protected void onAddBtnClick() {
         if(emptyField()) {
@@ -117,7 +122,10 @@ public class HoopController {
         }
     }
 
-
+    /**
+     * Uses the Team remove to remove the player from the team
+     * and database when the button is clicked.
+     */
     @FXML
     protected void onDropBtnClick() {
         Player rePlayer = playerInfoTable.getSelectionModel().getSelectedItem();
@@ -133,6 +141,11 @@ public class HoopController {
     private TextArea playerInfo;
     @FXML
     private Button buttonRefresh;
+
+    /**
+     * Resets the player information table when button is clicked,
+     * so it can show the most current information.
+     */
     @FXML
     protected void onRefreshButtonClick() {
         playerInfoTable.getItems().clear();
@@ -153,6 +166,10 @@ public class HoopController {
     @FXML
     private Button buttonLoad;
 
+    /**
+     * Grabs the information of the upcoming tournaments to
+     * the upcoming tournaments in the text area.
+     */
     @FXML
     protected void onLoadButtonClick() {
 
@@ -176,6 +193,11 @@ public class HoopController {
     @FXML
     private WebView mapWebView;
     boolean mapLoaded = false;
+
+    /**
+     * Be able to display a Google map with checking if the
+     * is displayed in the map tab.
+     */
     @FXML
     private void initMapView() {
         if (!mapLoaded) {
@@ -189,6 +211,11 @@ public class HoopController {
 
     @FXML
     private Button buttonSignOut;
+
+    /**
+     * When the button is pressed sign ou the player
+     * and clear the team captain id fields and team.
+     */
     @FXML
     private void onSignOutButtonClick() {
         //Disable team management and hide signOutButton
@@ -202,6 +229,9 @@ public class HoopController {
         teamName.setText("");
         playerInfo.setText("");
         storedTeamID = "";
+        //Clear team and captain
+        team = null;
+        captain = null;
     }
 
     public boolean emptyField(){

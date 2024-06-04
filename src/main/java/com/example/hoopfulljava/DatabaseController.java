@@ -8,8 +8,15 @@ import java.util.List;
 
 // EACH METHOD HOLDS BASE INPUTS FOR NOW WILL UPDATE THEM TO BOXES WHENEVER NEEDED
 public class DatabaseController {
-    
 
+
+    /**
+     * Establishes a connection to the database controller and
+     * gives back a connection. Make sure to input your database
+     * credentials.
+     *
+     * @return a Connection to the database.
+     */
     public Connection connect() {
 
         String url = "jdbc:mysql://localhost:3306/hoopfulDB";
@@ -32,7 +39,13 @@ public class DatabaseController {
 
     }
 
-
+    /**
+     * Grabs all the information from the Tournaments table
+     * and returns the information in a string.
+     *
+     * @return A String array of the all the tournaments in
+     *         the Tournament table
+     */
     public String[] getTournament() {
         // ol' faithful
         List<String> tournaments = new ArrayList<>();
@@ -98,7 +111,17 @@ public class DatabaseController {
         return teamName;
     }
 
-
+    /**
+     * Checks if the Captain username and pass word is in the table
+     * using a sql query and returns a boolean if the team captain
+     * used the right credentials.
+     *
+     * @param user - The username of the team captain
+     * @param pass - the password of the team captain
+     *
+     * @return A boolean of id the right credentials of the team
+     *         captain were the correct inputs.
+     */
     public boolean login(String user, String pass) {
 
         System.out.println(user + " " + pass);
@@ -446,6 +469,14 @@ public class DatabaseController {
                 }
         }
 
+    /**
+     * Add a player to the database using a sql query that inputs
+     * the necessary inputs for the player.
+     *
+     * @param pID - A string of the id for the player
+     * @param tID - A string of the team id for that player
+     * @param pName - A string of the name of the player
+     */
     public void addPlayer(String pID, String tID, String pName) {
 
         try {
@@ -470,7 +501,13 @@ public class DatabaseController {
         }
     }
 
-        public void deletePlayer(String pID) {
+    /**
+     * Deletes the player of the database using a sql query that takes in the
+     * id of the player.
+     *
+     * @param pID - A string of the player iD of the player to be removed.
+     */
+    public void deletePlayer(String pID) {
 
             try {
                 //conect to the database using the connect method
@@ -491,11 +528,15 @@ public class DatabaseController {
         }
 
     /**
+     * Get the make a captain from the table of captain using
+     * the username of the captain and return that captain.
      *
-     * @param userName
-     * @return The teamID of the passed captain
+     * @param userName - A string of the username the captain input
+     *
+     * @return A Captain object of the captain that was pulled based
+     *         on the username.
      */
-    public Captain getTeamIDFromCap(String userName) {
+    public Captain getTeamCaptain(String userName) {
 
         Captain captain = null;
 
@@ -512,7 +553,6 @@ public class DatabaseController {
 
             if (rs.next()) {
                 captain = new Captain(rs.getString("captainName") ,rs.getString("teamID"));
-                System.out.println(captain.getName());
             }
 
         } catch (Exception e) {
@@ -523,11 +563,17 @@ public class DatabaseController {
     }
 
     /**
-     * @param teamID
-     * @return An array representing all the players on the given team
+     * Uses a sql query and pulls the team from the table based
+     * on the team ID of the team pass in through the parameter
+     * and returns the team in qa LinkedList.
+     *
+     * @param team - A Team object of the team created used for
+     *               getting the team ID.
+     *
+     * @return A linkedList<Player> that has the whole team pulled
+     *         from the team ID.
      */
     public LinkedList<Player> getPlayers(Team team) {
-        // ol' faithful
         Player player = null;
 
         LinkedList<Player> grabTeam= new LinkedList<>();
