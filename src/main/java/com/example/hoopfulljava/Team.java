@@ -107,11 +107,11 @@ public class Team {
         int pIndex = 0;
 
         for(Player player : team){
-            count++;
             if (player.getPlayerID().equals(playerID)){
                 dbController.deletePlayer(playerID);
                 pIndex = count; //Set the index of removed player
             }
+            count++;
         }
 
         team.remove(pIndex);//Remove player
