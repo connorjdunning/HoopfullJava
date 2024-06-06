@@ -1,8 +1,5 @@
 package com.example.hoopfulljava;
 
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.scene.control.ListView;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -10,10 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
 
 public class HoopController {
 
