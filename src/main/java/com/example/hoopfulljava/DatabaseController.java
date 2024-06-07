@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-// EACH METHOD HOLDS BASE INPUTS FOR NOW WILL UPDATE THEM TO BOXES WHENEVER NEEDED
 public class DatabaseController {
 
 

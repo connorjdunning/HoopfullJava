@@ -20,21 +20,7 @@ public class HoopController {
 
     public HoopController() {
         dbController = new DatabaseController();
-
-//        try {
-//            conn = DriverManager.getConnection(url, userName, pass);
-//            System.out.println("CONNECTED");
-//        } catch(Exception e) {
-//            System.out.println(e.getMessage());
-//        }
     }
-
-//    // DB INFO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//    private final String url = "jdbc:mysql://localhost:3306/hoopfuldb";
-//    private final String userName ="root";
-//    private final String pass = "";
-//    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DATABASE INFO
-//    private Connection conn = null;
 
     private void checkAuth(String userName, String password) {
         authed = dbController.login(userName, password);
@@ -179,10 +165,6 @@ public class HoopController {
         tournamentInfo.setText(tournamentInfoBuilder.toString());
     }
 
-    //public final void setOnLoadButtonClicked(EventHandler<? super MouseEvent> value) {
-    //    onLoadButtonClick();
-    //}
-
     @FXML
     private WebView mapWebView;
     boolean mapLoaded = false;
@@ -211,10 +193,12 @@ public class HoopController {
      */
     @FXML
     private void onSignOutButtonClick() {
-        //Disable team management and hide signOutButton
+        //Disable team management
         teamManage.setDisable(true);
+
         //clear the ID
         storedTeamID = "";
+
         //clear fields
         msgLogin.setText("");
         userfield.setText("");
@@ -222,11 +206,18 @@ public class HoopController {
         teamName.setText("");
         playerInfo.setText("");
         storedTeamID = "";
+
         //Clear team and captain
         team = null;
         captain = null;
     }
 
+    /**
+     * Check if the fields for entering player information are empty.
+     *
+     * @return a boolean of true if a field is empty and false if it
+     *         is not empty.
+     */
     public boolean emptyField(){
         return(playerIDField.getText().equals("") || playerNameField.getText().equals("")
                 || playerIDField.getText().equals(" ") ||playerNameField.getText().equals(" "));
